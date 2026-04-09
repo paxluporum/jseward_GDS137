@@ -18,10 +18,18 @@ function animate()
 {
     context.clearRect(0, 0, canvas.width, canvas.height);
     ball.move();
-    if (ball.x > canvas.width + ball.radius) // if player moves off screen 
+// BOUNCE OFF RIGHT WALL
+    if (ball.x + ball.radius > canvas.width)
     {
-       //ball.x = -ball.width/2 //teleports player totally off the screen to the left // Turn this off before turning on bottom one
-       ball.vx *= -1 // reverse velocity to simulate bounce off right border //READ THIS LINE DANNY!!
+        ball.x = canvas.width - ball.radius;   // push ball back to the edge
+        ball.vx *= -1;                         // reverse horizontal direction
+    }
+
+    // BOUNCE OFF LEFT WALL
+    if (ball.x - ball.radius < 0)
+    {
+        ball.x = ball.radius;                  // push ball back to the edge
+        ball.vx *= -1;                         // reverse horizontal direction
     }
 
     ball.draw(); // everything above this does not visually appear untul this function is called
