@@ -1,12 +1,11 @@
-function Player()
+function Ball()
 {
     // set up player starting point
     this.x = canvas.width/2;
     this.y = canvas.height/2;
 
     // set up player dimensions
-    this.width = 100;
-    this.height = 100;
+    this.radius = 50;
 
     /// set up player color
     this.color = "rgba(255, 0, 0, 1)" 
@@ -20,7 +19,10 @@ function Player()
         context.save();
             context.fillStyle = this.color;
             context.translate(this.x, this.y);
-            context.fillRect((-this.width/2), (-this.height/2), this.width, this.height);
+
+            context.beginPath(); //Begin path
+            context.arc(0, 0, this.radius, 0, Math.PI * 2); //Draw Circle
+            context.fill();
         context.restore();
     }
 
