@@ -75,6 +75,8 @@ this.bottom = function()
 {
     return this.y + this.height/2
 }
+
+this.prevX = this.x; //for walls and shit- moves player back
 ////////////////////////
 
     /// set up player color
