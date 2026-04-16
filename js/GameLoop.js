@@ -48,11 +48,11 @@ function animate() {
         ball.vx *= -1;                         // reverse horizontal direction
     }
 
-    // BOUNCE OFF LEFT WALL
-    if (ball.x - ball.radius < 0) {
-        ball.x = ball.radius;                  // push ball back to the edge
-        ball.vx *= -1;                         // reverse horizontal direction
-    }
+    // // BOUNCE OFF LEFT WALL
+    // if (ball.x - ball.radius < 0) {
+    //     ball.x = ball.radius;                  // push ball back to the edge
+    //     ball.vx *= -1;                         // reverse horizontal direction
+    // }
 
     //BOUNCE OFF BOTTOM WALL
     if (ball.y + ball.radius > canvas.height) {
@@ -66,6 +66,12 @@ function animate() {
         ball.vy *= -1;
     }
 
+    //////////////////////// Losing Condition
+
+    if (ball.x - ball.radius < 0) {
+        ball.x = canvas.width / 2;
+        ball.vx *= -1;
+    }
 
 
     // ///////////////=============================
