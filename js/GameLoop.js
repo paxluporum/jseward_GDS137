@@ -4,15 +4,17 @@ var ball;
 var timer;
 var interval = 1000 / 60; //60 fps
 var counter = 0;
+var player1;
 
 
 canvas = document.getElementById("canvas");
 context = canvas.getContext("2d");
 
-ball = new GameObject(200, canvas.height / 2, 100, 100, "#00ff00");
+// ball = new GameObject(200, canvas.height / 2, 100, 100, "#00ff00");
 //ball.vx = 0; //horizontal movement
 //ball.vy = 0; // vertical movement
 
+player1 = new GameObject(100, canvas.height / 2, 25, 100, "#8400ff5e");
 
 npc1 = new GameObject(300, canvas.height / 2, 100, 100, "#00ffff");
 npc2 = new GameObject(600, canvas.height / 2, 100, 100, "#1900ff");
@@ -32,65 +34,65 @@ function animate() {
     }
 
 
-    ball.move();
-    // BOUNCE OFF RIGHT WALL
-    if (ball.x + ball.radius > canvas.width) {
-        ball.x = canvas.width - ball.radius;   // push ball back to the edge
-        ball.vx *= -1;                         // reverse horizontal direction
-        counter++;
-    }
+    // ball.move();
+    // // BOUNCE OFF RIGHT WALL
+    // if (ball.x + ball.radius > canvas.width) {
+    //     ball.x = canvas.width - ball.radius;   // push ball back to the edge
+    //     ball.vx *= -1;                         // reverse horizontal direction
+    //     counter++;
+    // }
 
-    // BOUNCE OFF LEFT WALL
-    if (ball.x - ball.radius < 0) {
-        ball.x = ball.radius;                  // push ball back to the edge
-        ball.vx *= -1;                         // reverse horizontal direction
-        counter++;
-    }
+    // // BOUNCE OFF LEFT WALL
+    // if (ball.x - ball.radius < 0) {
+    //     ball.x = ball.radius;                  // push ball back to the edge
+    //     ball.vx *= -1;                         // reverse horizontal direction
+    //     counter++;
+    // }
 
-    //BOUNCE OFF BOTTOM WALL
-    if (ball.y + ball.radius > canvas.height) {
-        ball.y = canvas.height - ball.radius;     // push back to edge
-        ball.vy *= -1;                            // reverse vertical direction
-        counter++;
-    }
+    // //BOUNCE OFF BOTTOM WALL
+    // if (ball.y + ball.radius > canvas.height) {
+    //     ball.y = canvas.height - ball.radius;     // push back to edge
+    //     ball.vy *= -1;                            // reverse vertical direction
+    //     counter++;
+    // }
 
-    // BOUNCE OFF TOP WALL
-    if (ball.y - ball.radius < 0) {
-        ball.y = ball.radius;                     // push back to edge
-        ball.vy *= -1;
-        counter++;
-    }
+    // // BOUNCE OFF TOP WALL
+    // if (ball.y - ball.radius < 0) {
+    //     ball.y = ball.radius;                     // push back to edge
+    //     ball.vy *= -1;
+    //     counter++;
+    // }
 
-    ///////////////=============================
-    //NPC1 collision stuff
-    if (npc1.collisionCheck(ball)) {
-        npc1.color = "#bbff00";
-    }
-    ////////////=====================
-    //NPC2 collision stuff
-    if (npc2.collisionCheck(ball)) {
-        context.strokeRect(npc2.x - npc2.width / 2, npc2.y - npc2.height / 2, npc2.width, npc2.height);
-    }
+    // ///////////////=============================
+    // //NPC1 collision stuff
+    // if (npc1.collisionCheck(ball)) {
+    //     npc1.color = "#bbff00";
+    // }
+    // ////////////=====================
+    // //NPC2 collision stuff
+    // if (npc2.collisionCheck(ball)) {
+    //     context.strokeRect(npc2.x - npc2.width / 2, npc2.y - npc2.height / 2, npc2.width, npc2.height);
+    // }
 
-    //NPC3 collision
-    if (npc3.collisionCheck(ball)) {
-        ball.x = ball.prevX
-    }
-    else 
-    {
-        ball.prevX = ball.x;
-    }
+    // //NPC3 collision
+    // if (npc3.collisionCheck(ball)) {
+    //     ball.x = ball.prevX
+    // }
+    // else 
+    // {
+    //     ball.prevX = ball.x;
+    // }
 
-
-    ball.drawCircle(); // everything above this does not visually appear untul this function is called
-    npc1.drawCircle();
-    npc2.drawCircle();
-    npc3.drawRect();
+player1.drawRect();
+    // ball.drawCircle(); // everything above this does not visually appear untul this function is called
+    // npc1.drawCircle();
+    // npc2.drawCircle();
+    // npc3.drawRect();
 
     // Display
-    context.fillStyle = "black";                  // text color
-    context.font = "bold 28px Arial";             // text style and size
-    context.fillText("Bounces: " + counter, 20, 50);  // text + position
+    // context.fillStyle = "black";                  // text color
+    // context.font = "bold 28px Arial";             // text style and size
+    // context.fillText("Bounces: " + counter, 20, 50);  // text + position
 }
 console.log("Current bounces:", counter);
 
