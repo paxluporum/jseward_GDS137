@@ -34,33 +34,39 @@ function animate() {
         player1.y += 4
     }
 
+    if (player1.y - player1.height / 2 < 0) {
+        player1.y = player1.height / 2;                    // top edge touches canvas top
+    }
+    if (player1.y + player1.height / 2 > canvas.height) {
+        player1.y = canvas.height - player1.height / 2;    // bottom edge touches canvas bottom
+    }
 
-// === BALL MOVEMENT & BOUNCE ===
-    ball.move();   // this should be x += vx, y += vy (from your GameObject)
-
+    ball.move();
     // BOUNCE OFF RIGHT WALL
     if (ball.x + ball.radius > canvas.width) {
-        ball.x = canvas.width - ball.radius;
-        ball.vx *= -1;
+        ball.x = canvas.width - ball.radius;   // push ball back to the edge
+        ball.vx *= -1;                         // reverse horizontal direction
     }
 
     // BOUNCE OFF LEFT WALL
     if (ball.x - ball.radius < 0) {
-        ball.x = ball.radius;
-        ball.vx *= -1;
+        ball.x = ball.radius;                  // push ball back to the edge
+        ball.vx *= -1;                         // reverse horizontal direction
     }
 
-    // BOUNCE OFF BOTTOM WALL
+    //BOUNCE OFF BOTTOM WALL
     if (ball.y + ball.radius > canvas.height) {
-        ball.y = canvas.height - ball.radius;
-        ball.vy *= -1;
+        ball.y = canvas.height - ball.radius;     // push back to edge
+        ball.vy *= -1;                            // reverse vertical direction
     }
 
     // BOUNCE OFF TOP WALL
     if (ball.y - ball.radius < 0) {
-        ball.y = ball.radius;
+        ball.y = ball.radius;                     // push back to edge
         ball.vy *= -1;
     }
+
+
 
     // ///////////////=============================
     // //NPC1 collision stuff
@@ -82,8 +88,8 @@ function animate() {
     //     ball.prevX = ball.x;
     // }
 
-player1.drawRect();
-ball.drawCircle(); // everything above this does not visually appear untul this function is called
+    player1.drawRect();
+    ball.drawCircle(); // everything above this does not visually appear untul this function is called
     // npc1.drawCircle();
     // npc2.drawCircle();
     // npc3.drawRect();
