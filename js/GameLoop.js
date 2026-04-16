@@ -50,19 +50,13 @@ function animate() {
     //     counter++;
     // }
 
-    // //BOUNCE OFF BOTTOM WALL
-    // if (ball.y + ball.radius > canvas.height) {
-    //     ball.y = canvas.height - ball.radius;     // push back to edge
-    //     ball.vy *= -1;                            // reverse vertical direction
-    //     counter++;
-    // }
-
-    // // BOUNCE OFF TOP WALL
-    // if (ball.y - ball.radius < 0) {
-    //     ball.y = ball.radius;                     // push back to edge
-    //     ball.vy *= -1;
-    //     counter++;
-    // }
+  
+if (player1.y - player1.height / 2 < 0) {
+    player1.y = player1.height / 2;                    // top edge touches canvas top
+}
+if (player1.y + player1.height / 2 > canvas.height) {
+    player1.y = canvas.height - player1.height / 2;    // bottom edge touches canvas bottom
+}
 
     // ///////////////=============================
     // //NPC1 collision stuff
@@ -96,4 +90,3 @@ player1.drawRect();
     // context.fillText("Bounces: " + counter, 20, 50);  // text + position
 }
 // console.log("Current bounces:", counter);
-
