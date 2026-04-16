@@ -12,7 +12,7 @@ context = canvas.getContext("2d");
 
 ball = new GameObject(200, canvas.height / 2, 100, 100, "#00ff00");
 ball.vx = 4; //horizontal movement
-ball.vy = 4; // vertical movement
+ball.vy = 0; // vertical movement
 
 player1 = new GameObject(100, canvas.height / 2, 25, 100, "#8400ff5e");
 
@@ -69,6 +69,17 @@ function animate() {
 
 
     // ///////////////=============================
+
+    // Player collision
+
+// === BALL HITS PLAYER PADDLE (left side) ===
+if (player1.collisionCheck(ball)) {
+    // Push the ball just outside the paddle so it doesn't get stuck inside
+    ball.x = player1.right() + ball.radius;
+
+    // Reverse the horizontal velocity 
+    ball.vx *= -1;
+}
     // //NPC1 collision stuff
     // if (npc1.collisionCheck(ball)) {
     //     npc1.color = "#bbff00";
