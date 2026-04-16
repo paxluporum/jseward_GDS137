@@ -25,12 +25,13 @@ timer = setInterval(animate, interval);
 function animate() {
     context.clearRect(0, 0, canvas.width, canvas.height);
 
-    if (d) {
-        ball.x += 4
+    player1.move();
+    if (w) {
+        player1.y -= 4
     }
 
-    if (a) {
-        ball.x -= 4
+    if (s) {
+        player1.y += 4
     }
 
 
@@ -94,5 +95,5 @@ player1.drawRect();
     // context.font = "bold 28px Arial";             // text style and size
     // context.fillText("Bounces: " + counter, 20, 50);  // text + position
 }
-console.log("Current bounces:", counter);
+// console.log("Current bounces:", counter);
 
