@@ -79,6 +79,11 @@ this.bottom = function()
 this.prevX = this.x; //for walls and shit- moves player back
 ////////////////////////
 
+///////Set UP PHYSICS
+this.force = 1;
+this.ax = 1; // horizontal acceleration
+this.ay = 1; // vert acceleration
+
     /// set up player color
     //this.color = "rgba(255, 0, 0, 1)"
 

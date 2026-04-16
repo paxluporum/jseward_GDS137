@@ -6,6 +6,9 @@ var interval = 1000 / 60; //60 fps
 var counter = 0;
 var player1;
 
+var frictionX = .5;
+var frictionY = .8;
+var gravity = 1;
 
 canvas = document.getElementById("canvas");
 context = canvas.getContext("2d");
@@ -25,21 +28,29 @@ timer = setInterval(animate, interval);
 function animate() {
     context.clearRect(0, 0, canvas.width, canvas.height);
 
+    doHandleAcceleration();
+    doHandleFriction();
+    doHandleGravity();
+    doUpdatePosition();
+    doCheckBottomBounds();
+
+
     player1.move();
-    if (w) {
-        player1.y -= 4
-    }
+    // if (w) {
+    //     player1.y -= 4
+    // }
 
-    if (s) {
-        player1.y += 4
-    }
+    // if (s) {
+    //     player1.y += 4
+    // }
 
-    if (player1.y - player1.height / 2 < 0) {
-        player1.y = player1.height / 2;                    // top edge touches canvas top
-    }
-    if (player1.y + player1.height / 2 > canvas.height) {
-        player1.y = canvas.height - player1.height / 2;    // bottom edge touches canvas bottom
-    }
+//////////////////////////STOPS PADDLE FROM GOING OFF SCREEN
+    // if (player1.y - player1.height / 2 < 0) {
+    //     player1.y = player1.height / 2;                    // top edge touches canvas top
+    // }
+    // if (player1.y + player1.height / 2 > canvas.height) {
+    //     player1.y = canvas.height - player1.height / 2;    // bottom edge touches canvas bottom
+    // }
 
     ball.move();
     // BOUNCE OFF RIGHT WALL
@@ -129,3 +140,57 @@ function animate() {
     // context.fillText("Bounces: " + counter, 20, 50);  // text + position
 }
 // console.log("Current bounces:", counter);
+
+
+function doHandleAcceleration()
+{
+    if (s)
+    {
+        player1.vy += player1.ay * player1.force;
+    }
+    if (w)
+    {
+        player1.vy += player1.ay * -player1.force;
+    }
+}
+
+function doHandleFriction()
+{
+    player1.vy *= frictionY;
+
+}
+
+function doHandleGravity()
+{
+    player1.vy += gravity;
+
+}
+
+function doUpdatePosition()
+{
+    player1.x += player1.vx;
+    player1.y += player1.vy;
+}
+
+function doCheckBottomBounds()
+{
+    if (player1.y > canvas.height - player1.height/2)
+    {
+        player1.y = canvas.height - player1.height/2;
+        player1.vy = 0;
+        doJump();
+    }
+}
+
+function doJump()
+{
+    if (w)
+    {
+        player1.vy = -20;
+    }
+
+    if (!w && player1.vy >= 0)
+    {
+        player1.vy = -40;
+    }
+}
