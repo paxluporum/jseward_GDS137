@@ -52,7 +52,7 @@ function GameObject(x, y, w, h, color) {
         this.color = color;
     }
         // set up player dimensions
-       //this.radius = 50; // DO I NEED THIS ANYMORE!!!!????
+       this.radius = 50; // DO I NEED THIS ANYMORE!!!!????
 
 /// BOUNDING BOX
 

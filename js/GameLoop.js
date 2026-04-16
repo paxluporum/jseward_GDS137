@@ -10,15 +10,15 @@ var player1;
 canvas = document.getElementById("canvas");
 context = canvas.getContext("2d");
 
-// ball = new GameObject(200, canvas.height / 2, 100, 100, "#00ff00");
-//ball.vx = 0; //horizontal movement
-//ball.vy = 0; // vertical movement
+ball = new GameObject(200, canvas.height / 2, 100, 100, "#00ff00");
+ball.vx = 4; //horizontal movement
+ball.vy = 4; // vertical movement
 
 player1 = new GameObject(100, canvas.height / 2, 25, 100, "#8400ff5e");
 
-npc1 = new GameObject(300, canvas.height / 2, 100, 100, "#00ffff");
-npc2 = new GameObject(600, canvas.height / 2, 100, 100, "#1900ff");
-npc3 = new GameObject(900, canvas.height / 2, 100, 100, "#ff00ff");
+// npc1 = new GameObject(300, canvas.height / 2, 100, 100, "#00ffff");
+// npc2 = new GameObject(600, canvas.height / 2, 100, 100, "#1900ff");
+// npc3 = new GameObject(900, canvas.height / 2, 100, 100, "#ff00ff");
 
 timer = setInterval(animate, interval);
 
@@ -35,28 +35,32 @@ function animate() {
     }
 
 
-    // ball.move();
-    // // BOUNCE OFF RIGHT WALL
-    // if (ball.x + ball.radius > canvas.width) {
-    //     ball.x = canvas.width - ball.radius;   // push ball back to the edge
-    //     ball.vx *= -1;                         // reverse horizontal direction
-    //     counter++;
-    // }
+// === BALL MOVEMENT & BOUNCE ===
+    ball.move();   // this should be x += vx, y += vy (from your GameObject)
 
-    // // BOUNCE OFF LEFT WALL
-    // if (ball.x - ball.radius < 0) {
-    //     ball.x = ball.radius;                  // push ball back to the edge
-    //     ball.vx *= -1;                         // reverse horizontal direction
-    //     counter++;
-    // }
+    // BOUNCE OFF RIGHT WALL
+    if (ball.x + ball.radius > canvas.width) {
+        ball.x = canvas.width - ball.radius;
+        ball.vx *= -1;
+    }
 
-  
-if (player1.y - player1.height / 2 < 0) {
-    player1.y = player1.height / 2;                    // top edge touches canvas top
-}
-if (player1.y + player1.height / 2 > canvas.height) {
-    player1.y = canvas.height - player1.height / 2;    // bottom edge touches canvas bottom
-}
+    // BOUNCE OFF LEFT WALL
+    if (ball.x - ball.radius < 0) {
+        ball.x = ball.radius;
+        ball.vx *= -1;
+    }
+
+    // BOUNCE OFF BOTTOM WALL
+    if (ball.y + ball.radius > canvas.height) {
+        ball.y = canvas.height - ball.radius;
+        ball.vy *= -1;
+    }
+
+    // BOUNCE OFF TOP WALL
+    if (ball.y - ball.radius < 0) {
+        ball.y = ball.radius;
+        ball.vy *= -1;
+    }
 
     // ///////////////=============================
     // //NPC1 collision stuff
@@ -79,7 +83,7 @@ if (player1.y + player1.height / 2 > canvas.height) {
     // }
 
 player1.drawRect();
-    // ball.drawCircle(); // everything above this does not visually appear untul this function is called
+ball.drawCircle(); // everything above this does not visually appear untul this function is called
     // npc1.drawCircle();
     // npc2.drawCircle();
     // npc3.drawRect();
